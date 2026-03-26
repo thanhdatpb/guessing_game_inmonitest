@@ -15,11 +15,10 @@ public class GameController {
 
     @PostMapping("/guess")
     public ResponseEntity<?> guess(
-            @RequestParam Long userId,
-            @RequestParam int number
+            @RequestParam String number
     )
 
     {
-        return ResponseEntity.ok(gameService.guess(userId, number));
+        return ResponseEntity.ok(gameService.guess( number));
     }
 }
