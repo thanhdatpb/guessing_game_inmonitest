@@ -5,10 +5,8 @@ import com.thanhdatpb.guessing_game_inmobitest.entity.User;
 import com.thanhdatpb.guessing_game_inmobitest.repository.GuessHistoryRepository;
 import com.thanhdatpb.guessing_game_inmobitest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Map;
 
