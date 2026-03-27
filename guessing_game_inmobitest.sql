@@ -15,6 +15,7 @@ CREATE TABLE guess_history (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
     guessed_number INT NOT NULL,
+    server_number INT NOT NULL,
     result BOOLEAN NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
@@ -33,6 +34,6 @@ ADD CONSTRAINT chk_guess_number CHECK (guessed_number BETWEEN 1 AND 5);
 
 INSERT INTO users (username, password, score, turns)
 VALUES 
-('dat', '123456', 5, 10),
-('user1', '123456', 8, 3),
-('user2', '123456', 2, 7);
+('dat', '$2a$10$9rFiZhnY4OwR1uJRdpQkHetg.X4HDlZRCW.jAK7uAQMSfpCzLP.Ky', 5, 10),
+('user1', '$2a$10$9rFiZhnY4OwR1uJRdpQkHetg.X4HDlZRCW.jAK7uAQMSfpCzLP.Ky', 8, 3),
+('user2', '$2a$10$9rFiZhnY4OwR1uJRdpQkHetg.X4HDlZRCW.jAK7uAQMSfpCzLP.Ky', 2, 7);
