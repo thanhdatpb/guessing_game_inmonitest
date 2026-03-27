@@ -37,8 +37,8 @@ public class GameService {
     private int purchaseTurns;
 
     @Transactional
-    public GuessResponse guess(String username, GuessRequest request) {
-        User user = userRepository.findByUsernameForUpdate(username)
+    public GuessResponse guess(Long userId, GuessRequest request) {
+        User user = userRepository.findByIdForUpdate(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
         if (user.getTurns() <= 0) {
@@ -72,8 +72,8 @@ public class GameService {
     }
 
     @Transactional
-    public UserResponse buyTurns(String username) {
-        User user = userRepository.findByUsernameForUpdate(username)
+    public UserResponse buyTurns(Long userId) {
+        User user = userRepository.findByIdForUpdate(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
         user.setTurns(user.getTurns() + purchaseTurns);
@@ -92,15 +92,15 @@ public class GameService {
     }
 
     @Transactional(readOnly = true)
-    public UserResponse getCurrentUser(String username) {
-        User user = userRepository.findByUsername(username)
+    public UserResponse getCurrentUser(Long userId) {
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
         return toUserResponse(user);
     }
 
     private UserResponse toUserResponse(User user) {
-        return new UserResponse(user.getUsername(), user.getScore(), user.getTurns());
+        return new UserResponse(user.getUsername(), user.getEmail(), user.getScore(), user.getTurns());
     }
 
     private int generateServerNumber(int guessedNumber) {

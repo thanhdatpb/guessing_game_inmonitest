@@ -30,12 +30,13 @@ public class AuthService {
 
         User user = new User();
         user.setUsername(normalizedUsername);
+        user.setEmail(normalizedUsername);
         user.setPassword(passwordEncoder.encode(request.password()));
         user.setScore(0);
         user.setTurns(0);
 
         User savedUser = userRepository.save(user);
-        String token = jwtUtil.generateToken(savedUser.getUsername());
+        String token = jwtUtil.generateToken(savedUser.getId());
         return toAuthResponse(savedUser, token);
     }
 
@@ -51,7 +52,7 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
         }
 
-        String token = jwtUtil.generateToken(user.getUsername());
+        String token = jwtUtil.generateToken(user.getId());
         return toAuthResponse(user, token);
     }
 

@@ -19,6 +19,9 @@ public class User {
     @Column(nullable = false, unique = true, length = 100)
     private String username;
 
+    @Column(nullable = false, unique = true, length = 255)
+    private String email;
+
     @Column(nullable = false)
     private String password;
 
@@ -37,6 +40,9 @@ public class User {
     @PrePersist
     public void prePersist() {
         Instant now = Instant.now();
+        if (email == null && username != null) {
+            email = username;
+        }
         if (score == null) {
             score = 0;
         }

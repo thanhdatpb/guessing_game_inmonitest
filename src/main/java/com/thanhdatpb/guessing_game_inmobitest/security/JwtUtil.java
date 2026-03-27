@@ -27,18 +27,19 @@ public class JwtUtil {
         this.expirationMs = expirationMs;
     }
 
-    public String generateToken(String username) {
+    public String generateToken(Long userId) {
         Date now = new Date();
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(String.valueOf(userId))
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + expirationMs))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public String extractUsername(String token) {
-        return parseClaims(token).getBody().getSubject();
+    public Long extractUserId(String token) {
+        String subject = parseClaims(token).getBody().getSubject();
+        return Long.parseLong(subject);
     }
 
     public boolean isValid(String token) {

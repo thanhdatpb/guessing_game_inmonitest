@@ -143,7 +143,6 @@ class GuessingGameApiIntegrationTest {
     private User saveUser(String username, String rawPassword, int score, int turns) {
         User user = new User();
         user.setUsername(username);
-        user.setEmail(username);
         user.setPassword(passwordEncoder.encode(rawPassword));
         user.setScore(score);
         user.setTurns(turns);
@@ -151,7 +150,6 @@ class GuessingGameApiIntegrationTest {
     }
 
     private String bearerToken(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow();
-        return "Bearer " + jwtUtil.generateToken(user.getId());
+        return "Bearer " + jwtUtil.generateToken(username);
     }
 }

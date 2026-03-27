@@ -4,6 +4,7 @@ USE guessing_game;
 CREATE TABLE users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     score INT DEFAULT 0,
     turns INT DEFAULT 0,
@@ -32,8 +33,8 @@ ALTER TABLE guess_history
 ADD CONSTRAINT chk_guess_number CHECK (guessed_number BETWEEN 1 AND 5);
 
 
-INSERT INTO users (username, password, score, turns)
+INSERT INTO users (username, email, password, score, turns)
 VALUES 
-('dat', '$2a$10$9rFiZhnY4OwR1uJRdpQkHetg.X4HDlZRCW.jAK7uAQMSfpCzLP.Ky', 5, 10),
-('user1', '$2a$10$9rFiZhnY4OwR1uJRdpQkHetg.X4HDlZRCW.jAK7uAQMSfpCzLP.Ky', 8, 3),
-('user2', '$2a$10$9rFiZhnY4OwR1uJRdpQkHetg.X4HDlZRCW.jAK7uAQMSfpCzLP.Ky', 2, 7);
+('dat', 'dat@example.com', '$2a$10$9rFiZhnY4OwR1uJRdpQkHetg.X4HDlZRCW.jAK7uAQMSfpCzLP.Ky', 5, 10),
+('user1', 'user1@example.com', '$2a$10$9rFiZhnY4OwR1uJRdpQkHetg.X4HDlZRCW.jAK7uAQMSfpCzLP.Ky', 8, 3),
+('user2', 'user2@example.com', '$2a$10$9rFiZhnY4OwR1uJRdpQkHetg.X4HDlZRCW.jAK7uAQMSfpCzLP.Ky', 2, 7);

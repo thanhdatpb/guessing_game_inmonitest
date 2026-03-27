@@ -95,7 +95,7 @@ class GuessingGameApiIntegrationTest {
         mockMvc.perform(post("/buy-turns")
                         .header("Authorization", token))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.username").value("alice"))
+                .andExpect(jsonPath("$.email").value("alice"))
                 .andExpect(jsonPath("$.score").value(0))
                 .andExpect(jsonPath("$.turns").value(5));
 
@@ -127,15 +127,15 @@ class GuessingGameApiIntegrationTest {
                         .header("Authorization", token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
-                .andExpect(jsonPath("$[0].username").value("bob"))
+                .andExpect(jsonPath("$[0].email").value("bob"))
                 .andExpect(jsonPath("$[0].score").value(8))
-                .andExpect(jsonPath("$[1].username").value("charlie"))
-                .andExpect(jsonPath("$[2].username").value("alice"));
+                .andExpect(jsonPath("$[1].email").value("charlie"))
+                .andExpect(jsonPath("$[2].email").value("alice"));
 
         mockMvc.perform(get("/me")
                         .header("Authorization", token))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.username").value("bob"))
+                .andExpect(jsonPath("$.email").value("bob"))
                 .andExpect(jsonPath("$.score").value(8))
                 .andExpect(jsonPath("$.turns").value(2));
     }
@@ -143,7 +143,6 @@ class GuessingGameApiIntegrationTest {
     private User saveUser(String username, String rawPassword, int score, int turns) {
         User user = new User();
         user.setUsername(username);
-        user.setEmail(username);
         user.setPassword(passwordEncoder.encode(rawPassword));
         user.setScore(score);
         user.setTurns(turns);
@@ -151,7 +150,6 @@ class GuessingGameApiIntegrationTest {
     }
 
     private String bearerToken(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow();
-        return "Bearer " + jwtUtil.generateToken(user.getId());
+        return "Bearer " + jwtUtil.generateToken(username);
     }
 }

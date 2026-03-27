@@ -35,7 +35,7 @@ public class GameController {
             @Valid @RequestBody GuessRequest request,
             Authentication authentication
     ) {
-        return ResponseEntity.ok(gameService.guess(authentication.getName(), request));
+        return ResponseEntity.ok(gameService.guess(Long.parseLong(authentication.getName()), request));
     }
 
     @PostMapping("/buy-turns")
@@ -45,7 +45,7 @@ public class GameController {
             security = @SecurityRequirement(name = "bearerAuth")
     )
     public ResponseEntity<UserResponse> buyTurns(Authentication authentication) {
-        return ResponseEntity.ok(gameService.buyTurns(authentication.getName()));
+        return ResponseEntity.ok(gameService.buyTurns(Long.parseLong(authentication.getName())));
     }
 
     @GetMapping("/leaderboard")
@@ -65,6 +65,6 @@ public class GameController {
             security = @SecurityRequirement(name = "bearerAuth")
     )
     public ResponseEntity<UserResponse> me(Authentication authentication) {
-        return ResponseEntity.ok(gameService.getCurrentUser(authentication.getName()));
+        return ResponseEntity.ok(gameService.getCurrentUser(Long.parseLong(authentication.getName())));
     }
 }
