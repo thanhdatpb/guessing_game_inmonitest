@@ -37,7 +37,6 @@ services:
       GAME_WIN_PROBABILITY: 0.05
       GAME_PURCHASE_TURNS: 5
     ports:
-      - "${APP_HOST_PORT:-8081}:8080"
+      - "${APP_HOST_PORT:-8080}:8080"
 
-volumes:
-  mysql_data:
+volumes: { mysql_data: }

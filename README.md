@@ -9,6 +9,7 @@ Spring Boot REST API cho bài test Inmobi.
 - Spring Security + JWT
 - Spring Data JPA
 - MySQL
+- Validate + Lombok
 - Swagger / OpenAPI
 - Docker Compose
 
@@ -63,13 +64,15 @@ Build and run the full stack:
 ```bash
 docker compose up --build
 ```
+Minh họa chạy docker file:
+![img_1.png](img_1.png)
 
 This starts:
 
 - `mysql` on host port `3307` by default
-- `app` on host port `8081` by default
+- `app` on host port `8080` by default
 
-If `3307` or `8081` are not suitable, override them:
+If `3307` or `8080` are not suitable, override them:
 
 ```powershell
 $env:APP_HOST_PORT="8080"
